@@ -1,0 +1,191 @@
+
+@keyframes blink-warning {
+    70% {
+        color: @light;
+    }
+
+    to {
+        color: @light;
+        background-color: @warning;
+    }
+}
+
+@keyframes blink-critical {
+    70% {
+      color: @light;
+    }
+
+    to {
+        color: @light;
+        background-color: @critical;
+    }
+}
+
+/* -----------------------------------------------------------------------------
+ * Styles
+ * -------------------------------------------------------------------------- */
+
+/* COLORS */
+/* @define-color things */
+@define-color bg      #232530;
+@define-color bg-alt  #1c1e26;
+@define-color fg      #c7c9cb;
+@define-color fg-alt  #fdf0ed;
+@define-color hred    #e95678;
+@define-color hgreen  #07DA8C;
+@define-color horange #F09383;
+
+/* Reset all styles */
+* {
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+button:hover {
+  box-shadow: none; /* Remove predefined box-shadow */
+  text-shadow: none; /* Remove predefined text-shadow */
+  background: none; /* Remove predefined background color (white) */
+  transition: none; /* Disable predefined animations */
+}
+
+/* --------------------------------------------------------------------------- */
+
+/* The whole bar */
+#waybar {
+    background: @bg;
+    color: @fg;
+    font-family: "Rounded Mplus 1c", "Font Awesome 5 Pro", "Iosevka Nerd Font";
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Module Groups*/
+.modules-left {
+  background: @bg-alt;
+  padding-left: 20px;
+}
+
+
+/* --------------------------------------------------------------------------- */
+/* customs are set with #custom-name */
+#custom-spotify-artist,
+#custom-spotify-song
+{
+  background: @bg;
+  color: @fg;
+}
+
+#custom-spotify-artist {
+  padding-left: 20px;
+}
+
+#custom-spotify-song {
+  padding-left: 10px;
+  padding-right: 20px;
+}
+
+/* --------------------------------------------------------------------------- */
+
+#wireplumber {
+  min-width: 80px;
+  color: @fg-alt;
+  background: @bg-alt;
+  font-family: "Iosevka Custom";
+  padding-right: 10px;
+  padding-left: 20px;
+}
+
+#wireplumber:hover {
+  color: @hred;
+}
+
+
+/* --------------------------------------------------------------------------- */
+
+#workspaces {
+  min-width: 50px;
+  font-family: "Iosevka Custom";
+  padding-right: 10px;
+}
+
+#workspaces button.visible {
+  color: @fg-alt;
+}
+
+#workspaces button.visible:hover {
+  color: @horange;
+}
+
+/* --------------------------------------------------------------------------- */
+
+#submap {
+  font-family: "Iosevka Custom";
+  color: @fg-alt;
+  padding-right: 20px;
+}
+
+#submap:hover {
+  color: @horange;
+}
+
+
+/* --------------------------------------------------------------------------- */
+
+#clock {
+  padding-right: 20px;
+}
+
+/* --------------------------------------------------------------------------- */
+
+#idle_inhibitor {
+  background: @bg-alt;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+#idle_inhibitor.activated {
+  color: @fg;
+}
+#idle_inhibitor.deactivated {
+  color: @bg;
+}
+
+#idle_inhibitor.activated:hover {
+  color: @hgreen;
+}
+#idle_inhibitor.deactivated:hover {
+  color: @hred;
+}
+
+/* --------------------------------------------------------------------------- */
+
+#custom-settings {
+  background: @bg-alt;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#custom-settings:hover {
+  color: @hred;
+}
+
+/* --------------------------------------------------------------------------- */
+
+#custom-power {
+  background: @bg-alt;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#custom-power:hover {
+  color: @hred;
+}
+
+/* --------------------------------------------------------------------------- */
+
+#custom-launcher {
+  background: @bg-alt;
+  padding-right: 30px;
+}

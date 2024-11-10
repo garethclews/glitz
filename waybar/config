@@ -1,0 +1,107 @@
+{
+    // SETTINGS -----------------------------------------------------------------
+    "layer": "top",
+    "position": "top",
+    "gtk-layer-shell": true,
+    "height": 52,
+    "width": 2560,
+    // Choose the order of the modules
+    "modules-left": [ "hyprland/workspaces"
+                    , "hyprland/submap"
+                    , "custom/launcher"
+                    , "custom/spotify-artist"
+                    , "custom/spotify-song"
+                    ],
+    "modules-center": [],
+    "modules-right": [ "clock"
+                     , "wireplumber"
+                     , "idle_inhibitor"
+                     , "custom/settings"
+                     , "custom/power"
+                     ],
+
+    // MODULES ------------------------------------------------------------------
+    "hyprland/workspaces": {
+        "active-only": true,
+        "tooltip": false,
+        "format": "<span foreground=\"#e95679\">󰍎</span> {id} ",
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+    },
+
+    "hyprland/submap": {
+        "format": "<span foreground=\"#F09383\"></span> {:8}",
+        "tooltip": false,
+        "always-on": true,
+        "on-click": "hyprctl dispatch submap reset",
+    },
+
+    "custom/launcher": {
+        "format": "<span foreground=\"#EE64AE\"></span>",
+        "on-click": "eww open launcher --toggle",
+    },
+
+    "custom/spotify-artist": {
+        "format": "<span foreground=\"#27D796\"></span>  {}",
+        "escape": true,
+        "tooltip": false,
+        "max-length": 30,
+        "on-click": "eww open music --toggle",
+        "on-click-right": "playerctl -p spotify play-pause",
+        "on-click-middle": "killall spotify",
+        "exec": "playerctl -p spotify --follow metadata --format '{{artist}}' 2>/dev/null",
+        "exec-if": "pgrep spotify",
+    },
+
+    "custom/spotify-song": {
+        "format": "<span foreground=\"#e95679\"></span>  {}",
+        "escape": true,
+        "max-length": 30,
+        "on-click": "eww open music --toggle",
+        "on-click-right": "playerctl -p spotify play-pause",
+        "on-click-middle": "killall spotify",
+        "exec": "playerctl -p spotify --follow metadata --format '{{title}}' 2>/dev/null",
+        "exec-if": "pgrep spotify",
+        "tooltip": false,
+    },
+
+    "clock": {
+        "timezone": "Europe/London",
+        "format": "<span foreground=\"#F09383\"></span>  {:%H:%M %Z}",
+        "format-alt": "<span foreground=\"#F09383\"></span>  {:%a, %b %d %C%y}",
+        "tooltip": false,
+        "on-click-right": "gsimplecal",
+    },
+
+    "wireplumber": {
+        "format-icons": [""],
+        "format": "{icon} {volume:3}%",
+        "format-muted": " ",
+        "max-volume": 150,
+        "scroll-step": 5,
+        "tooltip": false,
+        "on-click-right": "wpctl set-mute @DEFAULT_SINK@ toggle",
+        "on-click": "eww open volume --toggle",
+    },
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        },
+        "tooltip": false,
+    },
+
+    "custom/settings": {
+        "format": "",
+        "on-click": "XDG_CURRENT_DESKTOP='gnome' gnome-control-center",
+        "tooltip": false,
+    },
+
+    "custom/power": {
+        "format": "⏻",
+        "on-click": "eww open power --toggle",
+        "tooltip": false,
+    },
+}
