@@ -1,52 +1,106 @@
 ;; ** Variables ***********************************************************************
 ;; Music vars
-(defpoll SONG :interval "1s" `scripts/music_info --song`)
-(defpoll ARTIST :interval "1s" `scripts/music_info --artist`)
-(defpoll STATUS :interval "1s" `scripts/music_info --status`)
-(defpoll CURRENT :interval "1s" `scripts/music_info --time`)
-(defpoll COVER :interval "1s" `scripts/music_info --cover`)
+(defpoll SONG    :interval "1s" `scripts/music_info --song`)
+(defpoll ARTIST  :interval "1s" `scripts/music_info --artist`)
+(defpoll STATUS  :interval "1s" `scripts/music_info --status`)
+(defpoll CURRENT :initial 0 :interval "1s" `scripts/music_info --time`)
+(defpoll COVER   :interval "1s" `scripts/music_info --cover`)
 
+;; Volume
+(defpoll VOLUME  :initial 100 :interval "1s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2 * 100}'")
+
+;; Keybinds
+(defvar bind-visible false)
+(defpoll BINDS :interval "1s" :run-while bind-visible "true")
 
 ;; ** Widgets *************************************************************************
 
 ;; Music
 (defwidget music [] 
-  (box :class "genwin" :orientation "h" :space-evenly "false" :vexpand "false" :hexpand "false"
-       (box :class "album_art" :vexpand "false" :hexpand "false" :style "background-image: url('${COVER}');")
-       (box :orientation "v" :spacing 20 :space-evenly "false" :vexpand "false" :hexpand "false"
-            (label :halign "center" :class "song" :wrap "true" :limit-width 20 :text SONG)
-            (label :halign "center" :class "artist" :wrap "true" :limit-width 15 :text ARTIST)
-            (box :orientation "h" :spacing 20 :halign "center" :space-evenly "true" :vexpand "false" :hexpand "false"
-                 (button :class "btn_prev" :onclick "scripts/music_info --prev" "玲")
-                 (button :class "btn_play" :onclick "scripts/music_info --toggle" STATUS)
-                 (button :class "btn_next" :onclick "scripts/music_info --next" "怜"))
-            (box :class "music_bar" :halign "center" :vexpand "false" :hexpand "false"
-                 (scale :min 0 :active "true" :max 100 :value CURRENT)))))
+  (box
+   :class "genwin" :orientation "h" :space-evenly "false" :vexpand "false" :hexpand "false"
+   (box :class "album_art" :vexpand "false" :hexpand "false" :style "background-image: url('${COVER}');")
+   (box
+    :orientation "v" :spacing 20 :space-evenly "false" :vexpand "false" :hexpand "false"
+    (label :halign "center" :class "song" :wrap "true" :limit-width 20 :text SONG)
+    (label :halign "center" :class "artist" :wrap "true" :limit-width 15 :text ARTIST)
+    (box :orientation "h" :spacing 20 :halign "center" :space-evenly "true" :vexpand "false" :hexpand "false"
+         (button :class "btn_prev" :onclick "scripts/music_info --prev" "玲")
+         (button :class "btn_play" :onclick "scripts/music_info --toggle" STATUS)
+         (button :class "btn_next" :onclick "scripts/music_info --next" "怜"))
+    (box :class "music_bar" :halign "center" :vexpand "false" :hexpand "false"
+         (scale :min 0 :active "true" :max 100 :value CURRENT)))))
 
 ;; power buttons
 (defwidget logout [] 
-  (box :class "genwin" :vexpand "false" :hexpand "false"
-       (button :class "btn_logout" :onclick "hyprcrtl dispatch exit" "󰈆")))
+  (box
+   :class "genwin" :vexpand "false" :hexpand "false"
+   (button :class "btn_logout" :onclick "hyprcrtl dispatch exit" "󰈆")))
 (defwidget sleep []
-  (box :class "genwin" :vexpand "false" :hexpand "false"
-       (button :class "btn_sleep" :onclick "systemctl suspend" "")))
+  (box
+   :class "genwin" :vexpand "false" :hexpand "false"
+   (button :class "btn_sleep" :onclick "systemctl suspend" "")))
 (defwidget reboot []
-  (box :class "genwin" :vexpand "false" :hexpand "false"
-       (button :class "btn_reboot" :onclick "systemctl reboot" "󰁙")))
+  (box
+   :class "genwin" :vexpand "false" :hexpand "false"
+   (button :class "btn_reboot" :onclick "systemctl reboot" "󰁙")))
 (defwidget poweroff []
-  (box :class "genwin" :vexpand "false" :hexpand "false"
-       (button :class "btn_poweroff" :onclick "systemctl poweroff" "⏻")))
+  (box
+   :class "genwin" :vexpand "false" :hexpand "false"
+   (button :class "btn_poweroff" :onclick "systemctl poweroff" "⏻")))
+
+;; Volume Widgets ;;
+(defwidget volume []
+  (box
+   :class "genwin"
+   :vexpand "false"
+   :hexpand "false"
+   :orientation "h"
+   :space-evenly "false"
+   :spacing "2"
+   (box
+    :class "volbar"
+    (scale
+     :value VOLUME
+     :orientation "h"
+     :flipped false
+     :tooltip "Volume: ${VOLUME}%"
+     :max 101
+     :min 0
+     :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%" ))))
 
 
-;; ** Windows *************************************************************************
+;; keymap widgets ;;
+(defwidget keymap []
+  (box
+   :class "genwin"
+   :vexpand "false"
+   :hexpand "false"
+   :orientation "h"
+   :space-evenly "true"
+   (box
+    :class "keymap"
+    (label :class "bind" :text BINDS))))
+
+
+;; Windows *************************************************************************
 
 ;; music
-(defwindow music :stacking "fg" :focusable "false" :active "true" :monitor 0
-           :geometry (geometry :x 100 :y 10 :width 610 :height 280)
-           (music))
+(defwindow music
+    :stacking "fg" :focusable "false" :active "true" :monitor 0
+    :geometry (geometry :x 100 :y 10 :width 610 :height 280)
+    (music))
 
-(defwindow power :stacking "fg" :focusable "false" :active "true" :monitor 0
-           :geometry (geometry :x 2294 :y 0 :width 265 :height 60)
-           :class "power"
-           (box (sleep) (logout) (reboot) (poweroff))
-           )
+(defwindow power
+    :stacking "fg" :focusable "false" :active "true" :monitor 0
+    :geometry (geometry :x 2294 :y 0 :width 265 :height 60)
+    :class "power"
+    (box (sleep) (logout) (reboot) (poweroff))
+    )
+
+(defwindow volume
+    :stacking "fg" :focusable "false" :active "true" :monitor 0
+    :geometry (geometry :x 2250 :y 0 :width 200 :height 25)
+    :class "volume"
+    (volume)
+    )

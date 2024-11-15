@@ -97,3 +97,18 @@
 .btn_poweroff:hover {
   color: #E95678;
 }
+
+/** Volume *******************************************/
+.volbar scale trough highlight {
+  all: unset;
+  background-color: #2E303E;
+  border-radius: 8px;
+}
+.volbar scale trough {
+  all: unset;
+  background-color: #232530;
+  border-radius: 4px;
+  min-height: 14px;
+  min-width: 160px;
+  margin : 10px 20px 10px 20px;
+}
