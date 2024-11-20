@@ -18,7 +18,7 @@
 .genwin {
   // background-color: #232530;
   background-color: #16161c;
-  border-radius: 7px;
+  border-radius: 4px;
 }
 
 /** Music ***************************************/
@@ -102,7 +102,7 @@
 .volbar scale trough highlight {
   all: unset;
   background-color: #21BFC2;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 .volbar scale trough {
   all: unset;
@@ -110,5 +110,5 @@
   border-radius: 4px;
   min-height: 14px;
   min-width: 160px;
-  margin : 10px 20px 10px 20px;
+  margin : 15px 20px 15px 20px;
 }

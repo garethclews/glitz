@@ -121,13 +121,12 @@ button:hover {
 
 /* --------------------------------------------------------------------------- */
 
-#submap {
-  font-family: "Iosevka Custom";
+#custom-submap {
   color: @fg-alt;
-  padding-right: 20px;
+  padding-right: 30px;
 }
 
-#submap:hover {
+#custom-submap:hover {
   color: @horange;
 }
 

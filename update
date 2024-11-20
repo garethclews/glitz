@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+cp -a ~/.config/{eww,waybar,hypr,kitty,wlogout} .
+git add -- .

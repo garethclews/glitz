@@ -51,7 +51,7 @@ get_cover() {
   if [ "$STATUS" -eq 0 ]; then
     echo "/tmp/cover.png"
   else
-    echo "images/music.jpg"
+    echo "images/music.png"
   fi
 }
 
@@ -67,7 +67,7 @@ elif [[ "$1" == "--time" ]]; then
 elif [[ "$1" == "--cover" ]]; then
   get_cover
 elif [[ "$1" == "--toggle" ]]; then
-  playerctl -p spotify play-pause
+  playerctl play-pause
 elif [[ "$1" == "--next" ]]; then
   {
     playerctl -p spotify next

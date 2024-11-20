@@ -1,0 +1,34 @@
+#!/usr/bin/env zsh
+
+# set up the default value
+echo "󰧖"
+
+# Provide the link to our Hyprland socket
+SOCKET="$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
+
+# Check if the socket exists
+if [ ! -e "$SOCKET" ]; then
+  echo "Trying to connect to $SOCKET"
+  echo "Socket not found!"
+  exit 1
+fi
+
+# Read from the socket and filter based on the specified pattern
+while IFS= read -r line; do
+  # Use grep to search for the pattern "submap>>"
+  if [[ $line == *submap\>\>* ]]; then
+    # Extract and compare the content after "submap>>"
+    case $line in
+    "submap>>Super") echo "󰧜" ;;
+    "submap>>Session") echo "󱃗" ;;
+    "submap>>Windows") echo "󱗜" ;;
+    "submap>>Move") echo "󱥪" ;;
+    "submap>>Shift") echo "󰜵" ;;
+    "submap>>Apps") echo "󰋒" ;;
+    "submap>>Media") echo "󰎄" ;;
+    "submap>>Settings") echo "󰒔" ;;
+    *) echo "󰧖" ;;
+
+    esac
+  fi
+done < <(nc -U "$SOCKET")

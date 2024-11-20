@@ -7,7 +7,7 @@
     "width": 2560,
     // Choose the order of the modules
     "modules-left": [ "hyprland/workspaces"
-                    , "hyprland/submap"
+                    , "custom/submap"
                     , "custom/launcher"
                     , "custom/spotify-artist"
                     , "custom/spotify-song"
@@ -29,15 +29,14 @@
         "on-scroll-down": "hyprctl dispatch workspace e-1",
     },
 
-    "hyprland/submap": {
-        "format": "<span foreground=\"#F09383\"></span> {:8}",
+    "custom/submap": {
+        "format": "<span foreground=\"#F09383\">{}</span>",
         "tooltip": false,
-        "always-on": true,
-        "on-click": "hyprctl dispatch submap reset",
+        "exec": "$HOME/.config/hypr/scripts/submap"
     },
 
     "custom/launcher": {
-        "format": "<span foreground=\"#EE64AE\"></span>",
+        "format": "<span foreground=\"#EE64AE\">󰩳</span>",
         "on-click": "eww open launcher --toggle",
     },
 
@@ -94,7 +93,7 @@
     },
 
     "custom/settings": {
-        "format": "",
+        "format": "",
         "on-click": "XDG_CURRENT_DESKTOP='gnome' gnome-control-center",
         "tooltip": false,
     },
