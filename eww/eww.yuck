@@ -70,17 +70,6 @@
      :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%" ))))
 
 
-;; keymap widgets ;;
-(defwidget keymap []
-  (box
-   :class "genwin"
-   :vexpand "false"
-   :hexpand "false"
-   :orientation "h"
-   :space-evenly "true"
-   (box
-    :class "keymap"
-    (label :class "bind" :text BINDS))))
 
 
 ;; Windows *************************************************************************
@@ -88,19 +77,12 @@
 ;; music
 (defwindow music
     :stacking "fg" :focusable "false" :active "true" :monitor 0
-    :geometry (geometry :x 100 :y 10 :width 610 :height 280)
+    :geometry (geometry :x 100 :y 1100 :width 610 :height 280)
     (music))
-
-(defwindow power
-    :stacking "fg" :focusable "false" :active "true" :monitor 0
-    :geometry (geometry :x 2294 :y 0 :width 265 :height 60)
-    :class "power"
-    (box (sleep) (logout) (reboot) (poweroff))
-    )
 
 (defwindow volume
     :stacking "fg" :focusable "false" :active "true" :monitor 0
-    :geometry (geometry :x 2250 :y 0 :width 200 :height 25)
+    :geometry (geometry :x 2250 :y 1352 :width 200 :height 35)
     :class "volume"
     (volume)
     )
