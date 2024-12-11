@@ -1,9 +1,7 @@
 /** Global *******************************************/
 *{
   all: unset;
-  font-family: "Rounded Mplus 1c";
-  font-family: feather;
-  font-family: Iosevka;
+  font-family: "Noto Sans", "Symbols Nerd Font Mono";
 }
 
 /** Background ***************************************/
@@ -11,7 +9,6 @@
   background-image: url("images/bg.png");
   background-color: #16161c;
   opacity: 1;
-
 }
 
 /** Generic window ***********************************/
@@ -45,7 +42,10 @@
 }
 
 .btn_prev, .btn_play, .btn_next {
-  font-family: Iosevka Nerd Font;
+  font-family: "Symbols Nerd Font Mono";
+   &:hover {
+     color: #F09383;
+  }
 }
 .btn_prev {
   color: #FAB795;
@@ -53,15 +53,20 @@
   font-weight : normal;
 }
 .btn_play {
-  color: #29D398;
+  color: #27d796;
   font-size : 48px;
   font-weight : bold;
+
+  &:hover{
+    color: #09F7A0;
+  }
 }
 .btn_next {
   color: #FAB795;
   font-size : 32px;
   font-weight : normal;
 }
+
 
 .music_bar scale trough highlight {
   all: unset;
@@ -111,4 +116,10 @@
   min-height: 14px;
   min-width: 160px;
   margin : 15px 20px 15px 20px;
+}
+
+
+/*** Keybinds ************************************/
+.key {
+  color: #E95678;
 }

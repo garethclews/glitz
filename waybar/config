@@ -30,14 +30,16 @@
     },
 
     "custom/submap": {
-        "format": "<span foreground=\"#F09383\">{}</span>",
+        "format": "{}",
         "tooltip": false,
-        "exec": "$HOME/.config/hypr/scripts/submap"
+        "exec": "$HOME/.config/hypr/scripts/submap",
+        "on-click": "~/.config/hypr/scripts/binds",
     },
 
     "custom/launcher": {
-        "format": "<span foreground=\"#EE64AE\">󰩳</span>",
-        "on-click": "eww open launcher --toggle",
+        "format": "󰩳",
+        "tooltip": false,
+        "on-click": "nwg-drawer -fm nautilus -ovl -s ~/.config/waybar/themes/drawer.css",
     },
 
     "custom/spotify-artist": {
@@ -47,7 +49,7 @@
         "max-length": 30,
         "on-click": "eww open music --toggle",
         "on-click-right": "playerctl -p spotify play-pause",
-        "on-click-middle": "killall spotify",
+        "on-click-middle": "hyprctl dispatch workspace 6",
         "exec": "playerctl -p spotify --follow metadata --format '{{artist}}' 2>/dev/null",
         "exec-if": "pgrep spotify",
     },
@@ -58,7 +60,7 @@
         "max-length": 30,
         "on-click": "eww open music --toggle",
         "on-click-right": "playerctl -p spotify play-pause",
-        "on-click-middle": "killall spotify",
+        "on-click-middle": "hyperctl dispatch workspace 6",
         "exec": "playerctl -p spotify --follow metadata --format '{{title}}' 2>/dev/null",
         "exec-if": "pgrep spotify",
         "tooltip": false,
@@ -73,9 +75,9 @@
     },
 
     "wireplumber": {
-        "format-icons": [""],
-        "format": "{icon} {volume:3}%",
-        "format-muted": " ",
+        "format-icons": ["", "", ""],
+        "format": "{icon}",
+        "format-muted": "",
         "max-volume": 150,
         "scroll-step": 5,
         "tooltip": false,

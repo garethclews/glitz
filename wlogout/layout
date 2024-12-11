@@ -1,6 +1,6 @@
 {
     "label" : "lock",
-    "action" : "loginctl lock-session",
+    "action" : "~/.config/hypr/scripts/lock || loginctl lock-session",
     "text" : "lock",
     "keybind" : "l"
 }

@@ -1,7 +1,7 @@
 
 @define-color main-bg #16161c;
-@define-color wb-act-bg #1A1C23;
-@define-color wb-hvr-bg #FAB795;
+@define-color wb-act-bg #FAB795;
+@define-color wb-hvr-bg #DA103F;
 
 * {
   background-image: none;
